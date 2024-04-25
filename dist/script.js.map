@@ -1,1 +1,1 @@
-{"version":3,"file":"script.js","mappings":";;;;;AAAAA,OAAO,CAACC,GAAG,CAAC,GAAG,CAAC,C","sources":["webpack://window/./src/js/main.js"],"sourcesContent":["console.log(\"1\");\r\n"],"names":["console","log"],"sourceRoot":""}
+{"version":3,"file":"script.js","mappings":";;;;;AAAAA,OAAO,CAACC,GAAG,CAAC,CAAC,CAAC,C","sources":["webpack://window/./src/js/main.js"],"sourcesContent":["console.log(1);\r\n"],"names":["console","log"],"sourceRoot":""}
