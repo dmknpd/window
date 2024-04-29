@@ -1,9 +1,10 @@
-const modals = () => {
+const modals = (state) => {
   function bindModal(
     triggerSelector,
     modalSelector,
     closeSelector,
-    closeClickOverlay = true
+    closeClickOverlay = true,
+    requiredInputs = []
   ) {
     const trigger = document.querySelectorAll(triggerSelector),
       modal = document.querySelector(modalSelector),
@@ -16,13 +17,17 @@ const modals = () => {
           e.preventDefault();
         }
 
-        windows.forEach((item) => {
-          item.style.display = "none";
-        });
+        let requieredChecked = requieredCheck(requiredInputs, state);
 
-        modal.style.display = "block";
-        document.body.style.overflow = "hidden";
-        //   document.body.classList.add("modal-open");
+        if (requieredChecked) {
+          windows.forEach((item) => {
+            item.style.display = "none";
+          });
+
+          modal.style.display = "block";
+          document.body.style.overflow = "hidden";
+          //   document.body.classList.add("modal-open");
+        }
       });
     });
 
@@ -57,6 +62,19 @@ const modals = () => {
     }, time);
   }
 
+  function requieredCheck(requiredInputs, state) {
+    if (requiredInputs.length === 0) {
+      return true;
+    } else {
+      for (let key of requiredInputs) {
+        if (!(key in state)) {
+          return false;
+        }
+      }
+      return true;
+    }
+  }
+
   bindModal(
     ".popup_engineer_btn",
     ".popup_engineer",
@@ -68,13 +86,15 @@ const modals = () => {
     ".popup_calc_button",
     ".popup_calc_profile",
     ".popup_calc_profile_close",
-    false
+    false,
+    ["form"]
   );
   bindModal(
     ".popup_calc_profile_button",
     ".popup_calc_end",
     ".popup_calc_end_close",
-    false
+    false,
+    ["type"]
   );
 
   // showModalByTime(".popup", 60000);
